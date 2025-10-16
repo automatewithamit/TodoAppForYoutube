@@ -26,7 +26,7 @@ I've created a complete deployment package for your ToDo application. Here's eve
 ### Step 1: Prepare Your App
 ```bash
 ./prepare-for-deployment.sh
-```
+```   
 
 ### Step 2: Push to GitHub
 ```bash
