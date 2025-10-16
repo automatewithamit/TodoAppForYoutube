@@ -1,0 +1,19 @@
+{
+  "status": "commited",
+  "type": "backend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:5001",
+  "backendAuthType": "basic token",
+  "backendUsername": "TestUser1",
+  "backendPassword": "Testing@123",
+  "executionArgs": {
+    "projectName": "ToDoAppForYoutube",
+    "projectPath": "/Users/amittripathi/Amit Tripathi Projects/ToDoAppForYoutube",
+    "testIds": [],
+    "additionalInstruction": "",
+    "envs": {
+      "API_KEY": "sk-user-2azx70lsXuH1wZZf0KU7Vy9B6tRfSbS16IgR9qPRioltg4UWoHc6wzYVOD-f1ibZtF1eHUVtPJ0X5ItLBlfNDUlCMqr49kiIRMlRdq_1KWs1brVsDDWjqm8K7MA_u8l8SNI"
+    }
+  },
+  "proxy": "http://55afa321-c3a4-40ff-a328-cdcfc6901f5f:YLqxltk0fZd32v0lQiWUcb4mDxaW25Ld@tun.testsprite.com:8080"
+}

@@ -1,0 +1,46 @@
+[
+  {
+    "id": "TC001",
+    "title": "user registration with valid data",
+    "description": "Test the user registration endpoint with valid name, email, and password to ensure a new user is created successfully and an access token is returned."
+  },
+  {
+    "id": "TC002",
+    "title": "user login with valid credentials",
+    "description": "Test the user login endpoint with correct email and password to verify successful authentication and receipt of an access token."
+  },
+  {
+    "id": "TC003",
+    "title": "get tasks with valid token and filters",
+    "description": "Test retrieving tasks for an authenticated user with various filters like status, category, priority, and search terms to ensure correct tasks are returned."
+  },
+  {
+    "id": "TC004",
+    "title": "create task with required and optional fields",
+    "description": "Test creating a new task with mandatory title and optional fields such as description, due date, priority, status, category, and tags to verify task creation."
+  },
+  {
+    "id": "TC005",
+    "title": "update existing task with valid data",
+    "description": "Test updating an existing task by task ID with valid fields to confirm the task is updated correctly and the response contains updated task details."
+  },
+  {
+    "id": "TC006",
+    "title": "delete task by valid task id",
+    "description": "Test deleting a task by providing a valid task ID and valid authentication token to ensure the task is removed successfully."
+  },
+  {
+    "id": "TC007",
+    "title": "get user task statistics with valid token",
+    "description": "Test retrieving task statistics for an authenticated user to verify the accuracy of total tasks, completed, pending, in-progress, overdue counts, and completion rate."
+  },
+  {
+    "id": "TC008",
+    "title": "health check api status",
+    "description": "Test the health check endpoint to confirm the API is running and returns a healthy status message."
+  }
+]
+
+
+
+
