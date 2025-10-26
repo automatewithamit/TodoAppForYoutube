@@ -360,10 +360,29 @@ def get_stats():
 def health_check():
     return jsonify({'status': 'healthy', 'message': 'ToDo API is running'}), 200
 
-if __name__ == '__main__':
+# Database initialization route (for manual table creation)
+@app.route('/api/init-db', methods=['POST'])
+def init_database():
+    try:
+        with app.app_context():
+            db.create_all()
+            return jsonify({'message': 'Database tables created successfully'}), 200
+    except Exception as e:
+        return jsonify({'error': f'Failed to create database tables: {str(e)}'}), 500
+
+# Initialize database tables
+def create_tables():
     with app.app_context():
-        db.create_all()
-    
+        try:
+            db.create_all()
+            print("Database tables created successfully")
+        except Exception as e:
+            print(f"Error creating database tables: {e}")
+
+# Create tables when the app starts
+create_tables()
+
+if __name__ == '__main__':
     # Get port from environment variable (for Render) or use 5001 for local development
     port = int(os.environ.get('PORT', 5001))
     app.run(debug=False, host='0.0.0.0', port=port)
