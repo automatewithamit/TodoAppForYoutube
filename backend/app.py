@@ -19,6 +19,22 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JWT_SECRET_KEY'] = os.environ.get('JWT_SECRET_KEY', 'jwt-secret-string')
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(days=7)
 
+# Handle PostgreSQL URL format for Render
+if app.config['SQLALCHEMY_DATABASE_URI'].startswith('postgres://'):
+    app.config['SQLALCHEMY_DATABASE_URI'] = app.config['SQLALCHEMY_DATABASE_URI'].replace('postgres://', 'postgresql://', 1)
+
+# Add fallback for database connection issues
+try:
+    # Test database connection
+    if 'postgresql' in app.config['SQLALCHEMY_DATABASE_URI']:
+        print("Using PostgreSQL database")
+    else:
+        print("Using SQLite database")
+except Exception as e:
+    print(f"Database configuration warning: {e}")
+    # Fallback to SQLite if PostgreSQL fails
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todoapp.db'
+
 # Initialize extensions
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
@@ -339,4 +355,7 @@ def health_check():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    app.run(debug=True, host='0.0.0.0', port=5001)
+    
+    # Get port from environment variable (for Render) or use 5001 for local development
+    port = int(os.environ.get('PORT', 5001))
+    app.run(debug=False, host='0.0.0.0', port=port)

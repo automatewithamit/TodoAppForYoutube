@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../config/axios';
 import toast from 'react-hot-toast';
 import { format } from 'date-fns';
 import { 
@@ -51,7 +51,7 @@ const Dashboard = () => {
 
   const fetchTasks = async () => {
     try {
-      const response = await axios.get('/api/tasks');
+      const response = await api.get('/api/tasks');
       setTasks(response.data.tasks);
     } catch (error) {
       toast.error('Failed to fetch tasks');
@@ -62,7 +62,7 @@ const Dashboard = () => {
 
   const fetchStats = async () => {
     try {
-      const response = await axios.get('/api/stats');
+      const response = await api.get('/api/stats');
       setStats(response.data);
     } catch (error) {
       console.error('Failed to fetch stats:', error);
@@ -100,7 +100,7 @@ const Dashboard = () => {
 
   const handleCreateTask = async (taskData) => {
     try {
-      const response = await axios.post('/api/tasks', taskData);
+      const response = await api.post('/api/tasks', taskData);
       setTasks([response.data.task, ...tasks]);
       await fetchStats();
       toast.success('Task created successfully!');
@@ -111,7 +111,7 @@ const Dashboard = () => {
 
   const handleUpdateTask = async (taskId, taskData) => {
     try {
-      const response = await axios.put(`/api/tasks/${taskId}`, taskData);
+      const response = await api.put(`/api/tasks/${taskId}`, taskData);
       setTasks(tasks.map(task => 
         task.id === taskId ? response.data.task : task
       ));
@@ -124,7 +124,7 @@ const Dashboard = () => {
 
   const handleDeleteTask = async (taskId) => {
     try {
-      await axios.delete(`/api/tasks/${taskId}`);
+      await api.delete(`/api/tasks/${taskId}`);
       setTasks(tasks.filter(task => task.id !== taskId));
       await fetchStats();
       toast.success('Task deleted successfully!');
