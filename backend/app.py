@@ -28,6 +28,14 @@ try:
     # Test database connection
     if 'postgresql' in app.config['SQLALCHEMY_DATABASE_URI']:
         print("Using PostgreSQL database")
+        # Test if psycopg2 is available
+        try:
+            import psycopg2
+            print("psycopg2 is available")
+        except ImportError as e:
+            print(f"psycopg2 not available: {e}")
+            print("Falling back to SQLite")
+            app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todoapp.db'
     else:
         print("Using SQLite database")
 except Exception as e:
